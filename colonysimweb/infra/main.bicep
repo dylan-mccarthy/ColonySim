@@ -4,8 +4,11 @@ param containerAppsEnvironmentName string
 @description('Azure Container App Name')
 param containerAppName string
 
+@description('Azure Container Registry Name')
+param containerRegistryName string
+
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
-  name: 'containerRegistry'
+  name: containerRegistryName
   location: resourceGroup().location
   sku: {
     name: 'Basic'

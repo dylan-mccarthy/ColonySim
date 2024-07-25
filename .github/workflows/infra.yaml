@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  paths:
+    - "colonysimweb/infra/*"
 
 permissions:
   id-token: write

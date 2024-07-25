@@ -5,10 +5,7 @@ on:
     branches:
       - main
   paths:
-    include:
-      - "colonysimweb/*"
-    exclude:
-      - "colonysimweb/infra/*"
+    - "colonysimweb/*"
 
 permissions:
   id-token: write

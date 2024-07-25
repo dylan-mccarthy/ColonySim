@@ -7,8 +7,15 @@ param containerAppName string
 @description('Azure Container Registry Name')
 param containerRegistryName string
 
+@description('Managed Identity Name')
+param managedIdentityName string
+
 @description('Image Name')
 param imageName string = 'nginx'
+
+resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' existing = {
+  name: managedIdentityName
+}
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: containerRegistryName
@@ -60,6 +67,12 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
           image: imageName
         }
       ]
+    }
+  }
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: {
+      '${managedIdentity.id}': {}
     }
   }
 }

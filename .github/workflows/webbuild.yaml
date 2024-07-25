@@ -25,6 +25,7 @@ jobs:
           password: ${{ secrets.ACR_CLIENT_SECRET }}
 
       - name: "Build Image and Push"
+        working-directory: ./colonysimweb
         run: |
           docker build -t ddecontainerreg01.azurecr.io/colonysimweb:latest .
           docker push ddecontainerreg01.azurecr.io/colonysimweb:latest

@@ -30,4 +30,4 @@ jobs:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: rg-ae-deploymentdemo-dev
           template: ./colonysimweb/infra/main.bicep
-          parameters: ./colonysimweb/infra/main.biceparam
+          parameters: ./colonysimweb/infra/main.bicepparam

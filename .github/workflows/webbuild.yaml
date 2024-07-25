@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  paths:
+    include:
+      - "colonysimweb/*"
+    exclude:
+      - "colonysimweb/infra/*"
 
 permissions:
   id-token: write

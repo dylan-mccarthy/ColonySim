@@ -7,6 +7,9 @@ param containerAppName string
 @description('Azure Container Registry Name')
 param containerRegistryName string
 
+@description('Image Name')
+param imageName string = 'nginx'
+
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: containerRegistryName
   location: resourceGroup().location
@@ -54,7 +57,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
       containers: [
         {
           name: containerAppName
-          image: 'nginx'
+          image: imageName
         }
       ]
     }

@@ -1,4 +1,4 @@
 using 'main.bicep'
 
-param containerAppName = 'DemoApp'
+param containerAppName = 'demoapp'
 param containerAppsEnvironmentName = 'DemoAppEnvironment'

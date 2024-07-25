@@ -1,0 +1,33 @@
+name: Deploy Basic Infrastructure
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+
+      - name: "Login to Azure"
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: "Deploy Infrastructure"
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: rg-ae-deploymentdemo-dev
+          template: ./colonysimweb/infra/main.bicep
+          parameters: ./colonysimweb/infra/main.biceparam

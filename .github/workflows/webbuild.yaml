@@ -5,7 +5,9 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'infra/**'
+      - infra/**
+      - .github/**
+      - .devcontainer/**
   workflow_dispatch:
 
 permissions:

@@ -29,8 +29,17 @@ jobs:
           username: ${{ secrets.ACR_CLIENT_ID }}
           password: ${{ secrets.ACR_CLIENT_SECRET }}
 
-      - name: "Build Image and Push"
+      - name: "Build Image"
+        working-directory: ./colonysimapi
+        run: |
+          docker build -t ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} .
+
+      - name: "Tag Image Latest"
+        run: |
+          docker tag ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} ddecontainerreg01.azurecr.io/colonysimapi:latest
+
+      - name: "Push"
         working-directory: ./colonysimweb
         run: |
-          docker build -t ddecontainerreg01.azurecr.io/colonysimweb:latest .
+          docker push ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }}
           docker push ddecontainerreg01.azurecr.io/colonysimweb:latest

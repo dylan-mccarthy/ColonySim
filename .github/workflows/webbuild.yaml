@@ -34,13 +34,17 @@ jobs:
         run: |
           docker build -t ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} .
 
+      - name: "Push Image with Build Number"
+        working-directory: ./colonysimweb
+        run: |
+          docker push ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }}
+
       - name: "Tag Image Latest"
         working-directory: ./colonysimweb
         run: |
           docker tag ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} ddecontainerreg01.azurecr.io/colonysimapi:latest
 
-      - name: "Push"
+      - name: "Push Latest"
         working-directory: ./colonysimweb
         run: |
-          docker push ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }}
           docker push ddecontainerreg01.azurecr.io/colonysimweb:latest

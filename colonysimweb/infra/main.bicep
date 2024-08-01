@@ -50,7 +50,7 @@ resource environment 'Microsoft.App/managedEnvironments@2024-03-01' = {
 }
 
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
-  name: containerAppName
+  name: '${containerAppName}-ca'
   location: resourceGroup().location
   properties: {
     managedEnvironmentId: environment.id
@@ -69,8 +69,8 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
     template: {
       containers: [
         {
-          name: imageName
-          image: '${containerRegistryName}.azurecr.io/${imageName}:latest'
+          name: containerAppName
+          image: imageName
         }
       ]
     }

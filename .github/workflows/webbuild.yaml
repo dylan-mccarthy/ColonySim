@@ -44,3 +44,11 @@ jobs:
         run: |
           docker push ddecontainerreg01.azurecr.io/colonysimweb:latest
           docker push ddecontainerreg01.azurecr.io/colonysimweb:${{ github.run_number }}
+
+      - name: "Deploy to Container Apps"
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          acrName: ddecontainerreg01
+          containerAppName: demoapp
+          resourceGroup: rg-ae-deploymentdemo-dev
+          imageToDeploy: ddecontainerreg01.azurecr.io/colonysimweb:${{ github.run_number }}

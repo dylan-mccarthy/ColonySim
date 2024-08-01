@@ -59,8 +59,20 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
         targetPort: 80
         external: true
       }
+      registries: [
+        {
+          server: '${containerRegistryName}.azurecr.io'
+          identity: managedIdentity.id
+        }
+      ]
     }
     template: {
+      containers: [
+        {
+          name: imageName
+          image: '${containerRegistryName}.azurecr.io/${imageName}:latest'
+        }
+      ]
     }
   }
   identity: {

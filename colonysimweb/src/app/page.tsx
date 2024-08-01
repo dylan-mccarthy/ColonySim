@@ -121,6 +121,7 @@ export default function Home() {
           </p>
         </a>
       </div>
+      <div>Hello from version 2</div>
     </main>
   );
 }

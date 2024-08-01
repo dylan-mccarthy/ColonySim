@@ -30,11 +30,12 @@ jobs:
           password: ${{ secrets.ACR_CLIENT_SECRET }}
 
       - name: "Build Image"
-        working-directory: ./colonysimapi
+        working-directory: ./colonysimweb
         run: |
           docker build -t ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} .
 
       - name: "Tag Image Latest"
+        working-directory: ./colonysimweb
         run: |
           docker tag ddecontainerreg01.azurecr.io/colonysimapi:${{ github.run_number }} ddecontainerreg01.azurecr.io/colonysimapi:latest
 
